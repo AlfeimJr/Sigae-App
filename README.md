@@ -49,7 +49,7 @@ O **ViceriTest** é uma aplicação web desenvolvida com Angular para gerenciar 
 1. **Clone o Repositório**  
    Clone o projeto para sua máquina local com o comando:
    ```bash
-   git clone <URL-DO-REPOSITORIO>
+   git clone <https://github.com/AlfeimJr/Sigae-App>
    cd ViceriTest
    ```
 
