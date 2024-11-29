@@ -28,7 +28,7 @@
   <div class="form-container" [class]="{ 'step-two': currentStep === 1 }">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-fields">
-        @for ( field of formSteps[currentStep]?.fields; track field) {
+        @for ( field of formSteps[currentStep].fields; track field) {
         <div class="form-group">
           @if (field.type === 'text' || field.type === 'email' || field.mask) {
           <sigae-input-text
@@ -84,7 +84,7 @@
           (click)="nextStep()"
           [disabled]="
             currentStep === formSteps.length - 1 ||
-            steps.at(currentStep)?.invalid
+            (steps && steps.at(currentStep).invalid)
           "
         >
           Próximo
