@@ -1,0 +1,66 @@
+.step-two {
+  .inputs {
+    display: grid;
+    grid-template-areas:
+      "description description description description step hasCause"
+      "result result result priority category addProblem";
+    grid-gap: 1rem;
+
+    .item-1 {
+      grid-area: description;
+    }
+    .item-2 {
+      grid-area: step;
+    }
+    .item-3 {
+      grid-area: hasCause;
+    }
+    .item-4 {
+      grid-area: result;
+    }
+    .item-5 {
+      grid-area: priority;
+    }
+    .item-6 {
+      grid-area: category;
+    }
+    .item-7 {
+      grid-area: addProblem;
+    }
+  }
+
+  ::ng-deep {
+    .p-dropdown {
+      width: 100%;
+    }
+  }
+
+  /* Estilos para Mobile */
+  @media (max-width: 768px) {
+    .inputs {
+      grid-template-areas:
+        "description"
+        "step"
+        "hasCause"
+        "result"
+        "priority"
+        "category"
+        "addProblem";
+      grid-template-columns: 1fr;
+    }
+
+    .item-1,
+    .item-2,
+    .item-3,
+    .item-4,
+    .item-5,
+    .item-6,
+    .item-7 {
+      width: 100%;
+    }
+
+    .inputs > * {
+      margin-bottom: 1rem; /* Adiciona espaçamento entre os campos */
+    }
+  }
+}

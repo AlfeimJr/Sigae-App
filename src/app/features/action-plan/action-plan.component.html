@@ -1,0 +1,75 @@
+<section class="action-plan p-3">
+  <p-stepper [linear]="true">
+    <p-stepperPanel header="Etapa 1">
+      <ng-template
+        pTemplate="content"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div class="">
+          <sigae-step-one></sigae-step-one>
+        </div>
+        <div class="flex pt-4 justify-content-end">
+          <p-button
+            label="Próximo"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            [disabled]="!isNextEnabled"
+            (onClick)="nextCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Etapa 2">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div class="flex flex-column">
+          <sigae-step-two></sigae-step-two>
+        </div>
+        <div class="flex pt-4 justify-content-between">
+          <p-button
+            label="Anterior"
+            icon="pi pi-arrow-left"
+            (onClick)="prevCallback.emit()"
+          />
+          <p-button
+            label="Próximo"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            [disabled]="!existProblems"
+            (onClick)="nextCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Etapa 3">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-index="index"
+      >
+        <div class="flex flex-column">
+          <sigae-step-three></sigae-step-three>
+        </div>
+        <div class="flex gap-3 pt-4 justify-content-end">
+          <p-button
+            label="Anterior"
+            icon="pi pi-arrow-left"
+            (onClick)="prevCallback.emit()"
+          />
+          <a href="/action-plan">
+            <p-button
+              label="Concluir"
+              icon="pi pi-arrow-right"
+              iconPos="right"
+            />
+          </a>
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+</section>

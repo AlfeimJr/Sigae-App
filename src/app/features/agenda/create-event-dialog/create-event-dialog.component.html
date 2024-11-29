@@ -1,0 +1,53 @@
+<form [formGroup]="eventForm" class="flex flex-column gap-3">
+  <div class="p-fluid flex flex-column gap-3">
+    @for(field of fields; track field){
+    <div class="p-field flex flex-column">
+      <label [for]="field.name">{{ field.label }}</label>
+
+      @if( field.type === 'text'){
+      <input
+        [id]="field.name"
+        [formControlName]="field.name"
+        type="text"
+        [placeholder]="field.placeholder"
+        pInputText
+      />
+      } @if( field.type === 'textarea'){
+      <textarea
+        [id]="field.name"
+        [formControlName]="field.name"
+        rows="3"
+        pInputTextarea
+      >
+      </textarea>
+
+      }@if(field.type === 'dropdown'){
+      <p-dropdown
+        [id]="field.name"
+        [formControlName]="field.name"
+        [options]="field.options"
+        [placeholder]="field.placeholder"
+      >
+      </p-dropdown>
+      } @if(field.type === 'datetime'){
+      <p-calendar
+        [id]="field.name"
+        [formControlName]="field.name"
+        [showTime]="true"
+        hourFormat="24"
+        dateFormat="dd/mm/yy"
+      >
+      </p-calendar>
+      }
+    </div>
+    }
+  </div>
+  <button
+    type="submit"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="p-mt-2"
+    (click)="addEvent()"
+  ></button>
+</form>

@@ -1,0 +1,29 @@
+<section class="top-bar">
+  <div class="menu flex align-items-center gap-4">
+    <span> sigae </span>
+    <div class="flex gap-4">
+      @for( menuOption of menuOptions; track menuOption){
+      <span
+        class="menu-option cursor-pointer text-sm flex align-items-center p-1 gap-1"
+        style="color: #4b5563"
+        [routerLink]="menuOption.routerLink"
+      >
+        <i class="text-xs pi pi-{{ menuOption.icon }}"></i>
+        {{ menuOption.label }}</span
+      >
+      }
+    </div>
+  </div>
+  <div class="authentication">
+    @if(!authService.isAuthenticated()){
+    <p routerLink="/login">Login</p>
+    }@else {
+    <div class="flex gap-2 align-items-center">
+      <p (click)="logout()" class="flex align-items-center gap-2">
+        <i class="text-sm pi pi-power-off"></i>Sair
+      </p>
+    </div>
+
+    }
+  </div>
+</section>

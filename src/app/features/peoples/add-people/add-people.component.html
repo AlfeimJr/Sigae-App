@@ -1,0 +1,97 @@
+@if(isLoading){
+<div
+  class="flex align-items-center justify-content-center p-3 gap-2"
+  style="width: 100%"
+>
+  <p-skeleton shape="circle" size="2rem" styleClass="mr-2" />
+  <p-skeleton height="1rem" width="350px" styleClass="mb-2" />
+  <p-skeleton shape="circle" size="2rem" styleClass="mr-2" />
+  <p-skeleton height="1rem" width="350px" styleClass="mb-2" />
+  <p-skeleton shape="circle" size="2rem" styleClass="mr-2" />
+</div>
+<div class="form-container flex flex-column gap-3 p-3">
+  <div class="flex gap-3 justify-content-center">
+    <p-skeleton height="2rem" width="279px" styleClass="mb-2" />
+    <p-skeleton height="2rem" width="250px" styleClass="mb-2" />
+    <p-skeleton height="2rem" width="250px" styleClass="mb-2" />
+  </div>
+  <div class="flex gap-3 justify-content-center">
+    <p-skeleton height="2rem" width="398px" styleClass="mb-2" />
+    <p-skeleton height="2rem" width="398px" styleClass="mb-2" />
+  </div>
+</div>
+}@else {
+<section class="p-2">
+  <div class="card">
+    <p-steps [model]="items" [readonly]="false" [activeIndex]="active" />
+  </div>
+  <div class="form-container" [class]="{ 'step-two': currentStep === 1 }">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-fields">
+        @for ( field of formSteps[currentStep]?.fields; track field) {
+        <div class="form-group">
+          @if (field.type === 'text' || field.type === 'email' || field.mask) {
+          <sigae-input-text
+            [value]="formControl(field)"
+            [type]="field.type"
+            [idLabel]="field.label"
+            [mask]="field.mask"
+            [errorMessage]="
+              formControl(field).getError('required')
+                ? field.label + ' é obrigatório.'
+                : ''
+            "
+            [showAddButton]="field.mask === '(00) 00000-0000'"
+            (add)="addTelephone()"
+            (remove)="removeTelephone(field.name)"
+          ></sigae-input-text>
+          } @if (field.type === 'dropdown') {
+
+          <sigae-dropdown-select
+            [control]="formControl(field)"
+            [options]="field.options"
+            [placeHolder]="field.label"
+            [errorMessage]="
+              formControl(field).getError('required')
+                ? field.label + ' é obrigatório.'
+                : ''
+            "
+          ></sigae-dropdown-select>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-navigation flex gap-3">
+        @if( currentStep > 0) {
+        <p-button
+          type="button"
+          (click)="previousStep()"
+          [disabled]="currentStep === 0"
+        >
+          Anterior
+        </p-button>
+        } @if (currentStep === formSteps.length - 1) {
+        <p-button
+          (click)="addPeople()"
+          [loading]="isCreating"
+          [disabled]="isCreating"
+          >Concluir</p-button
+        >
+        }@else {
+        <p-button
+          type="button"
+          (click)="nextStep()"
+          [disabled]="
+            currentStep === formSteps.length - 1 ||
+            steps.at(currentStep)?.invalid
+          "
+        >
+          Próximo
+        </p-button>
+        }
+      </div>
+    </form>
+  </div>
+</section>
+}

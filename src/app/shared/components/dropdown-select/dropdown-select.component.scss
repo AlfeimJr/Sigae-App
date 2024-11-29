@@ -1,0 +1,18 @@
+.dropdown-dynamic {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .error-message {
+    position: absolute;
+    padding: 0.3rem;
+    font-size: 0.7rem;
+    bottom: 0px;
+    top: 35px;
+  }
+
+  ::ng-deep {
+    .p-dropdown {
+      width: 100%;
+    }
+  }
+}

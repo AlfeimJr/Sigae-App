@@ -1,0 +1,28 @@
+.peoples {
+  .table {
+    width: 100%;
+    .table-title {
+      padding: 1rem;
+      margin: 0 !important;
+      width: 100%;
+      border-bottom: 1px solid #e2e8f0;
+      border-top: 1px solid #e2e8f0;
+      color: #334155;
+      font-weight: bold;
+    }
+  }
+}
+
+:host ::ng-deep .p-datatable-sm th,
+:host ::ng-deep .p-datatable-sm td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+:host ::ng-deep .p-datatable-sm .p-button-text {
+  margin: 0 0.25rem;
+}
+
+:host ::ng-deep .p-datatable-sm th {
+  font-weight: bold;
+}

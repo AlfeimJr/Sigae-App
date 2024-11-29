@@ -1,0 +1,65 @@
+.login {
+  background-color: #e3e3e3;
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    border: 1px solid #e5e7eb;
+
+    .card {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+      width: 285px;
+      .header-card {
+        display: grid !important;
+        width: 100%;
+        grid-template-columns: 10% 70%;
+
+        div {
+          i {
+            cursor: pointer;
+          }
+        }
+
+        span {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      span {
+        font-size: 1rem;
+      }
+
+      .form-auth {
+        width: 224px;
+        form {
+          gap: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          .inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+          }
+        }
+
+        .buttons-auth {
+          padding: 1rem 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+}

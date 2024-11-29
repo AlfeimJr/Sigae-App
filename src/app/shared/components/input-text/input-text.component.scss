@@ -1,0 +1,26 @@
+.input-text {
+  position: relative;
+
+  .add-button-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  span {
+    font-size: 0.8rem;
+  }
+
+  .error-message {
+    position: absolute;
+    padding: 0.3rem;
+    font-size: 0.7rem;
+  }
+}
+::ng-deep {
+  .input-text {
+    .p-inputtext {
+      width: 100%;
+    }
+  }
+}

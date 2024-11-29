@@ -1,0 +1,28 @@
+<div class="p-fluid">
+  <form [formGroup]="actionForm" (ngSubmit)="submit()">
+    <div class="field">
+      <label for="description">Descrição da ação*</label>
+      <input
+        id="description"
+        type="text"
+        pInputText
+        formControlName="description"
+      />
+    </div>
+    <div class="field">
+      <label for="responsibility">Responsável pela ação*</label>
+      <p-dropdown
+        [options]="peoples"
+        [formControl]="getFormControl('responsibility')"
+        optionLabel="nome"
+        placeholder="Selecione a pessoa"
+      />
+    </div>
+    <button
+      type="submit"
+      pButton
+      label="Adicionar"
+      [disabled]="actionForm.invalid"
+    ></button>
+  </form>
+</div>

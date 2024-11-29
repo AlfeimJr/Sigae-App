@@ -1,0 +1,84 @@
+.form-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 900px;
+
+  h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  .form-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.4rem;
+
+    /* Estilo padrão (etapas 1 e última) */
+    .form-group {
+      flex: 1 1 calc(33.33% - 2rem); /* Para 3 colunas */
+      display: flex;
+      flex-direction: column;
+
+      sigae-input-text,
+      sigae-dropdown-select {
+        width: 100%;
+      }
+
+      label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  /* Quando estiver na etapa 2 */
+  &.step-two .form-fields {
+    flex-direction: column; /* Altera o layout para vertical */
+    .form-group {
+      flex: 1 1 100%; /* Ocupa 100% da largura */
+    }
+  }
+
+  .form-navigation {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      background-color: #007bff;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:disabled {
+        background-color: #e0e0e0;
+        color: #aaa;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+::ng-deep {
+  .mb-2 {
+    margin-bottom: unset !important;
+  }
+  .mr-2 {
+    margin-right: unset !important;
+  }
+}

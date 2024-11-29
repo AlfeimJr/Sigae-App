@@ -1,0 +1,82 @@
+@for(objective of objectives; track objective; let i = $index){
+<div class="step-two flex flex-column gap-3 p-4">
+  <h2>{{ objective.name }}</h2>
+  <form [formGroup]="problemForm">
+    <div class="inputs">
+      <input
+        class="item-1"
+        type="text"
+        formControlName="description"
+        placeholder="Descrição do problema*"
+        pInputText
+      />
+      <p-dropdown
+        class="item-2 w-full"
+        [options]="steps"
+        formControlName="step"
+        placeholder="Etapa*"
+      ></p-dropdown>
+      <p-dropdown
+        class="item-3"
+        [options]="hasCause"
+        formControlName="hasCause"
+        placeholder="Possui causa*"
+      ></p-dropdown>
+      <input
+        class="item-4"
+        type="text"
+        formControlName="result"
+        placeholder="Resultado"
+        pInputText
+      />
+      <p-dropdown
+        class="item-5"
+        [options]="priorities"
+        formControlName="priority"
+        placeholder="Prioridade*"
+      ></p-dropdown>
+      <p-dropdown
+        class="item-6"
+        [options]="categories"
+        formControlName="category"
+        placeholder="Categoria*"
+      ></p-dropdown>
+      <button
+        class="item-7"
+        pButton
+        type="button"
+        [disabled]="!problemForm.valid"
+        (click)="addProblem(objective.name)"
+      >
+        Adicionar
+      </button>
+    </div>
+  </form>
+
+  <div>
+    <p-table [value]="getProblems(objective.name)" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Descrição do problema</th>
+          <th>Etapa</th>
+          <th>Possui causa</th>
+          <th>Resultado</th>
+          <th>Prioridade</th>
+          <th>Categoria</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-problem>
+        <tr>
+          <td>{{ problem.description }}</td>
+          <td>{{ problem.step }}</td>
+          <td>{{ problem.hasCause ? "Sim" : "Não" }}</td>
+          <td>{{ problem.result }}</td>
+          <td>{{ problem.priority }}</td>
+          <td>{{ problem.category }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+}

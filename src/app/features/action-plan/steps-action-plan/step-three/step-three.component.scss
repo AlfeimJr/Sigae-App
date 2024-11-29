@@ -1,0 +1,38 @@
+.objective-header {
+  font-weight: bold;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+button {
+  margin-left: 5px;
+}
+
+tr td {
+  vertical-align: top;
+}
+/* Garantir que todas as colunas tenham o mesmo tamanho */
+.p-table {
+  table-layout: fixed; /* Controla o layout fixo da tabela */
+  width: 100%; /* Garante que a tabela ocupe a largura total */
+}
+
+/* Define largura mínima para as colunas */
+.p-table th,
+.p-table td {
+  min-width: 150px; /* Ajuste conforme necessário */
+  white-space: nowrap; /* Evita quebra de texto */
+  text-align: left; /* Alinha o conteúdo à esquerda */
+  padding: 10px; /* Espaçamento interno */
+}
+
+/* Adiciona um pouco de espaço visual */
+.expansion-row {
+  background-color: #f9f9f9;
+}
+
+.expansion-row td {
+  padding-left: 20px; /* Indenta as linhas dentro da expansão */
+}

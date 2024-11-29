@@ -1,0 +1,76 @@
+<div class="calendar">
+  <div class="calendar-sidebar">
+    <div class="calendar-sidebar-section">
+      <div class="">
+        <p-calendar
+          dateFormat="dd.mm.yy"
+          class="max-w-full"
+          [inline]="true"
+          [showWeek]="true"
+          (onSelect)="onDateSelected($event)"
+        />
+      </div>
+      <div class="event-list-container">
+        <h3>Hoje</h3>
+        @if( getTodayEvents().length === 0){
+        <p class="no-events">Nenhum evento hoje</p>
+        }@else {
+        <ul class="event-list">
+          @for(event of getTodayEvents(); track event.id){
+          <li [style.color]="event.backgroundColor">
+            <div class="event-item">
+              <span
+                class="event-color"
+                [style.backgroundColor]="event.backgroundColor"
+              ></span>
+              <div class="event-details flex justify-content-between">
+                <span class="event-title">{{ event.title }}</span>
+                <span style="color: black" class="event-time">{{
+                  event.start | date : "HH:mm"
+                }}</span>
+              </div>
+            </div>
+          </li>
+          }
+        </ul>
+        }
+      </div>
+
+      <div class="event-list-container">
+        <h3>Outros Eventos</h3>
+        @if( getOtherEvents().length === 0){
+        <p class="no-events">Nenhum evento</p>
+        }@else {
+        <ul class="event-list">
+          @for(event of getOtherEvents(); track event.id){
+          <li [style.color]="event.backgroundColor">
+            <div class="event-item">
+              <span
+                class="event-color"
+                [style.backgroundColor]="event.backgroundColor"
+              ></span>
+              <div class="event-details flex justify-content-between">
+                <span class="event-title">{{ event.title }}</span>
+                <span style="color: black" class="event-time">{{
+                  event.start | date : "HH:mm"
+                }}</span>
+              </div>
+            </div>
+          </li>
+          }
+        </ul>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar-container" style="width: 100%">
+    @if(calendarVisible()){
+    <div class="flex pb-2 justify-content-end">
+      <p-button (onClick)="addEvent()" label="Adicionar evento" />
+    </div>
+
+    <full-calendar #fullCalendar [options]="calendarOptions()"> </full-calendar>
+    }
+  </div>
+</div>

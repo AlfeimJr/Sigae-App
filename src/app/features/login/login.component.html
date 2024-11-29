@@ -1,0 +1,144 @@
+<section class="login">
+  <p-toast />
+  <main>
+    <section
+      class="card"
+      [style]="{ gap: isForgotMyPassword || isMultifactor ? '1rem' : '4rem' }"
+    >
+      <section [class]="isRegister || isForgotMyPassword ? 'header-card' : ''">
+        @if(isRegister || isForgotMyPassword){
+        <div (click)="isRegister = false || (isForgotMyPassword = false)">
+          <i class="pi pi-arrow-circle-left" style="font-size: 1rem"></i>
+        </div>
+
+        } @if(isRegister){
+        <span>Registrar</span>
+        }@else if( isForgotMyPassword){
+        <span>Recuperação</span>
+        }@else if(isMultifactor){
+        <span>Verificação</span>
+        } @else{
+        <span>Login</span>
+        }
+      </section>
+
+      <section class="form-auth">
+        <form #authFormGroupElement formGroup="authFormGroup">
+          @if(!isForgotMyPassword && !isMultifactor){
+          <div class="inputs">
+            <sigae-input-text
+              idLabel="email"
+              type="email"
+              [value]="emailControl"
+              [errorMessage]="
+                  authFormGroup.get('email')?.errors?.['email']
+                    ? 'Email inválido' : ''"
+            ></sigae-input-text>
+
+            <sigae-input-text
+              idLabel="Senha"
+              type="password"
+              [value]="passwordControl"
+            ></sigae-input-text>
+
+            @if(captcha){
+            <section class="captcha">
+              <div class="flex gap-2">
+                <span>{{ captcha }}</span>
+                <i
+                  class="pi pi-refresh cursor-pointer"
+                  style="font-size: 1rem"
+                  (click)="generateCaptcha()"
+                ></i>
+              </div>
+
+              <sigae-input-text
+                type="text"
+                [value]="captchaRespostaControl"
+              ></sigae-input-text>
+            </section>
+
+            } @if( !captcha){
+            <p-button
+              (onClick)="generateCaptcha()"
+              label="Não sou um robo"
+            ></p-button>
+            }
+          </div>
+
+          <div
+            class="buttons-auth"
+            [style]="{
+              'justify-content': isRegister ? 'center' : 'space-between'
+            }"
+          >
+            @if( !isRegister){
+            <p-button
+              [disabled]="!authFormGroup.valid"
+              (onClick)="login()"
+              label="Entrar"
+            />
+            <p-button (onClick)="isRegister = true" label="Registrar" />
+            } @if(isRegister){
+            <p-button
+              (onClick)="register()"
+              [disabled]="
+                emailControl.value == '' ||
+                passwordControl.value == '' ||
+                (captchaRespostaControl && captchaRespostaControl.value == '')
+              "
+              label="Concluir"
+            />
+
+            }
+          </div>
+          }
+
+          <section class="flex flex-column gap-4">
+            @if(isForgotMyPassword){
+            <div class="flex flex-column gap-4 p-2">
+              <span>Digite o email do seu cadastro</span>
+              <sigae-input-text
+                idLabel="email"
+                type="email"
+                [value]="emailControl"
+                [errorMessage]="
+                  authFormGroup.get('email')?.errors?.['email']
+                    ? 'Email inválido' : ''"
+              ></sigae-input-text>
+            </div>
+            <p-button
+              [disabled]="!authFormGroup.get('email')?.valid"
+              class="p-2"
+              (onClick)="forgotMyPassword()"
+              >Enviar</p-button
+            >
+            } @if(!isForgotMyPassword && !isRegister && !isMultifactor) {
+            <a (click)="isForgotMyPassword = true" class="cursor-pointer"
+              >Esqueci minha senha</a
+            >
+            }
+          </section>
+          @if(isMultifactor){
+          <section class="flex flex-column gap-4">
+            <sigae-input-text
+              idLabel="Código de Verificação"
+              type="text"
+              [value]="codeControl"
+              [errorMessage]="
+                codeControl.getError('required') ? 'Campo obrigatorio' : ''
+              "
+            ></sigae-input-text>
+            <p-button
+              class="p-2"
+              [disabled]="!codeControl.valid"
+              (onClick)="verifyCode()"
+              label="Verificar"
+            ></p-button>
+          </section>
+          }
+        </form>
+      </section>
+    </section>
+  </main>
+</section>

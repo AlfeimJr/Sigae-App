@@ -1,0 +1,15 @@
+<div class="dropdown-dynamic w-full">
+  <div>
+    <p-dropdown
+      [options]="options"
+      [formControl]="control"
+      [placeholder]="placeHolder"
+    />
+  </div>
+
+  @if(errorMessage != ''){
+  <span class="p-error error-message">{{ errorMessage }}</span>
+  }@else if(control.getError('required')){
+  <span class="p-error error-message">Campo obrigatório</span>
+  }
+</div>

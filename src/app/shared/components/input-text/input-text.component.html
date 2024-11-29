@@ -1,0 +1,25 @@
+<section class="input-text">
+  <div [class]="showAddButton ? 'add-button-container' : ''">
+    <p-floatLabel>
+      <input
+        autocomplete="nope"
+        [id]="idLabel"
+        [type]="type"
+        pInputText
+        [formControl]="value"
+        [mask]="mask"
+        autocomplete="new-password"
+      />
+      <label [for]="idLabel">{{ idLabel }}</label>
+    </p-floatLabel>
+    @if (showAddButton) {
+    <i class="pi pi-plus cursor-pointer" (click)="onAdd()"></i>
+    <i class="pi pi-times cursor-pointer" (click)="onRemove()"></i>
+    }
+  </div>
+  @if(errorMessage != ''){
+  <span class="p-error error-message">{{ errorMessage }}</span>
+  }@else if(value.getError('required')){
+  <span class="p-error error-message">Campo obrigatório</span>
+  }
+</section>
