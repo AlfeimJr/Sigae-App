@@ -11,7 +11,7 @@ import {
 import { InputTextFloatComponent } from '../../../../shared/components/input-text/input-text.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
-import { Objective } from '../../../../shared/types/objective';
+import { Objective, Problem } from '../../../../shared/types/objective';
 import { ObjectiveService } from '../../services/Objective/objective.service';
 
 @Component({
@@ -44,25 +44,34 @@ export class StepOneComponent implements OnInit {
 
   loadObjectives(): void {
     const initialObjectives = [
-      { name: 'Objetivo 1', selected: false },
-      { name: 'Objetivo 2', selected: false },
-      { name: 'Objetivo 3', selected: false },
+      { id: '1', name: 'Objetivo 1', selected: false, problems: [] },
+      { id: '2', name: 'Objetivo 2', selected: false, problems: [] },
+      { id: '3', name: 'Objetivo 3', selected: false, problems: [] },
     ];
 
+    const selectedObjectives = this.objectiveService.getSelectedObjectives()();
+
     initialObjectives.forEach((objective) => {
+      const isSelected = selectedObjectives.some(
+        (selected) => selected.name === objective.name
+      );
+
       this.objectives.push(
         this.fb.group({
+          id: [objective.id],
           name: [objective.name, Validators.required],
-          selected: [objective.selected],
-          problems: this.fb.array([]),
+          selected: [isSelected],
+          problems: this.fb.array(objective.problems || []),
         })
       );
     });
+    this.selectedObjectivesSignal.set(initialObjectives);
   }
   getSelectedObjectives(): Objective[] {
     return this.objectives.controls
       .filter((control) => control.get('selected')?.value)
       .map((control) => ({
+        id: control.get('id')?.value,
         name: control.get('name')?.value,
         selected: control.get('selected')?.value,
         problems: control.get('problems')?.value,
@@ -77,11 +86,27 @@ export class StepOneComponent implements OnInit {
     const control = this.objectives.at(index) as FormGroup;
     const selected = control.get('selected')?.value;
     const name = control.get('name')?.value;
+    const id = control.get('id')?.value;
 
-    if (selected) {
-      this.objectiveService.addObjective({ name, selected, problems: [] });
-    } else {
-      this.objectiveService.removeObjective(name);
-    }
+    selected
+      ? this.objectiveService.addObjective({
+          id,
+          name,
+          selected,
+          problems: [],
+        })
+      : this.objectiveService.removeObjective(name);
+  }
+
+  onObjectiveChange(index: number): void {
+    const control = this.objectives.at(index) as FormGroup;
+    const updatedObjective: Objective = {
+      id: control.get('id')?.value,
+      name: control.get('name')?.value,
+      selected: control.get('selected')?.value,
+      problems: control.get('problems')?.value || [],
+    };
+
+    this.objectiveService.updateObjective(updatedObjective);
   }
 }

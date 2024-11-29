@@ -9,6 +9,7 @@ export type Problem = {
 };
 
 export type Objective = {
+  id: string;
   name: string;
   selected: boolean;
   problems: Problem[];

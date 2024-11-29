@@ -21,7 +21,7 @@ export class ObjectiveService {
 
   addObjective(objective: Objective) {
     const current = this.selectedObjectives();
-    const exists = current.find((obj) => obj.name === objective.name);
+    const exists = current.find((obj) => obj.id === objective.id);
     if (!exists) {
       this.selectedObjectives.set([...current, objective]);
     }
@@ -38,6 +38,20 @@ export class ObjectiveService {
       return objective;
     });
     this.selectedObjectives.set(updatedObjectives);
+  }
+
+  updateObjective(updatedObjective: Objective): void {
+    const current = this.selectedObjectives();
+    const index = current.findIndex((obj) => obj.id === updatedObjective.id);
+
+    if (index === -1) {
+      throw new Error(
+        `O objetivo "${updatedObjective.name}" não foi encontrado.`
+      );
+    }
+    const newObjectives = [...current];
+    newObjectives[index] = { ...newObjectives[index], ...updatedObjective };
+    this.selectedObjectives.set(newObjectives);
   }
 
   getProblemsByObjective(objectiveName: string): Problem[] {

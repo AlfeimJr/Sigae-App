@@ -22,6 +22,7 @@
         ></p-checkbox>
         <input
           type="text"
+          (change)="onObjectiveChange(i)"
           style="width: 50%"
           pInputText
           [formControl]="getFormControl(i, 'name')"
