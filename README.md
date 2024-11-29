@@ -59,7 +59,7 @@ O **ViceriTest** é uma aplicação web desenvolvida com Angular para gerenciar 
    npm install
    ```
 
-3. **Execute o Servidor de Desenvolvimento**  
+3. **Execute o projeto**  
    Após a instalação das dependências, inicie o servidor de desenvolvimento:
    ```bash
    ng serve
@@ -69,29 +69,3 @@ O **ViceriTest** é uma aplicação web desenvolvida com Angular para gerenciar 
    http://localhost:4200
    ```
 
-### Build para Produção
-
-Para gerar uma versão otimizada para produção, execute:
-```bash
-ng build --prod
-```
-Os arquivos de saída serão gerados no diretório `dist/`.
-
----
-
-## Estrutura Modular
-
-A aplicação é organizada em módulos que dividem a lógica por responsabilidades.
-
-### Módulos Principais
-
-- **Core**: Contém guardas, interceptadores e serviços gerais.
-- **Features**: Cada funcionalidade principal está encapsulada em seu módulo, como:
-  - `action-plan`: Gerenciamento de planos de ação.
-  - `agenda`: Gerenciamento de eventos.
-  - `peoples`: Cadastro e gerenciamento de pessoas.
-  - `login`: Autenticação de usuários.
-
----
-
-Se precisar de mais informações ou ajustes, entre em contato com os mantenedores do projeto ou abra uma issue no repositório.
